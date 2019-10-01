@@ -1,0 +1,13 @@
+@clear_border_outline: {
+    border: none;
+    outline: none;
+}
+
+.square(@length) {
+    height: @length;
+    width: @length;
+}
+
+.text-shadow(@color, @px) {
+    text-shadow: 0 @px @color, @px 0 @color, -@px 0 @color, 0 -@px @color;
+}
