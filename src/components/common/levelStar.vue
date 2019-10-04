@@ -1,17 +1,19 @@
 <template>
   <div class="level-star-container">
     <template v-for="n in 9">
-      <img :src="n <= level ? fillImg : emptyImg" :key="n" />
+      <img :src="n <= level ? fillStar : emptyStar" :key="n" />
     </template>
   </div>
 </template>
 
 <script>
+import fillStar from "../../assets/p/common/fillstar.png";
+import emptyStar from "../../assets/p/common/emptystar.png";
 export default {
   data() {
     return {
-      fillImg: "/picture/common/fillstar.png",
-      emptyImg: "/picture/common/emptystar.png"
+      fillStar,
+      emptyStar
     };
   },
   props: {

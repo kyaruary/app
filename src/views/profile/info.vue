@@ -5,7 +5,7 @@
     </cl-header>
     <div class="s-cell m-t-30 f-s-15" @click="show">
       <mt-cell title="头像">
-        <img :src="user.avator" class="user-avator" />
+        <img :src="defaultAvator" class="user-avator" />
       </mt-cell>
     </div>
     <div class="s-cell m-t-20 f-s-15">
@@ -23,7 +23,7 @@
     </div>
     <div class="s-cell m-t-20 f-s-15">
       <mt-cell title="ID">
-        <span class="f-c-b">{{user.userId}}</span>
+        <span class="f-c-b">{{user.user_id}}</span>
       </mt-cell>
     </div>
     <mt-actionsheet :actions="actions" v-model="sheetVisible"></mt-actionsheet>
@@ -32,6 +32,7 @@
 
 <script>
 import clHeader from "../../components/common/clHeader";
+import defaultAvator from "../../assets/p/common/default_avator.png";
 import { mapState } from "vuex";
 export default {
   components: {
@@ -40,6 +41,7 @@ export default {
   data() {
     return {
       sheetVisible: false,
+      defaultAvator,
       actions: [
         {
           name: "拍照",
@@ -65,7 +67,6 @@ export default {
     },
     moveCursor() {
       var el = document.getElementById("change-user-name");
-      console.log(this.user.username.length);
       el.setSelectionRange(
         this.user.username.length,
         this.user.username.length + 1

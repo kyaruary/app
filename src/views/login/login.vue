@@ -25,6 +25,8 @@
 
 <script>
 import lineBorder from "../../components/common/lineBorder";
+import { mapActions, mapMutations } from "vuex";
+import { login } from "../../service/auth";
 export default {
   components: {
     lineBorder
@@ -48,21 +50,22 @@ export default {
       }
       return true;
     },
-    submit() {
+    async submit() {
       const flag = this.validateFrom();
-      console.log(flag);
-      if (flag) {
+      if (!flag) {
         this.loginFlase = true;
         setTimeout(() => {
           this.loginFlase = false;
         }, 5000);
+      } else {
+        const user = await login({ secret: this.secret });
+        this.setUser(user);
+        window.localStorage.setItem("authToken", this.secret);
+        this.$router.push("/");
       }
     },
-    paste(e) {
-      console.log(e);
-      const f = document.execCommand("paste");
-      console.log(this.secret, f);
-    }
+    paste(e) {},
+    ...mapMutations(["setUser"])
   },
   computed: {
     tipMsg() {
@@ -75,7 +78,7 @@ export default {
 <style lang="less" scoped>
 @white: #fff;
 .login-container {
-  background-image: url("/picture/secret/background.jpg");
+  background-image: url("../../assets/p/secret/background.jpg");
   background-size: 375px;
   background-repeat: no-repeat;
   background-color: #d2e2e9;
@@ -126,7 +129,7 @@ export default {
   line-height: 57px;
   text-align: center;
   @base_font-family();
-  background: url("/picture/login/login_bg.png") no-repeat;
+  background: url("../../assets/p/secret/bg_input.png") no-repeat;
   background-size: 270px 52px;
   margin: 78px auto 0;
   color: #fff;
@@ -154,7 +157,6 @@ export default {
 }
 .tip {
   color: @white;
-  /* -webkit-text-stroke: 0.5px red; */
   height: 15px;
   .text-shadow(red, 1px);
   @base_font-family();

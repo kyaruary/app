@@ -1,57 +1,105 @@
 <template>
-  <div class="container con-p-20-15">
-    <cl-header title="体力记录">
-      <span slot="right" @click="recharge">充值</span>
-    </cl-header>
-    <div class="swiper">
-      <!-- <cell-list :limit="6888"></cell-list> -->
-      <video></video>
+  <div class="container record-container con-p-20-15">
+    <cl-header title="体力记录"></cl-header>
+    <div class="record-cell">
+      <cl-cell type="large" title="总计体力" :count="'20000'"></cl-cell>
     </div>
-    <keypad :visible="keypadVisible" :click="getValue" />
+    <div class="tabbar">
+      <span :class="{'link-active':showInjectRecord}" @click="ontab">注入记录</span>
+      <span :class="{'link-active':showReleaseRecord}" @click="ontab">释放记录</span>
+    </div>
+    <div class="tabbar-container">
+      <div class="container-item" v-if="showReleaseRecord">
+        <record-list :list="releaseList"></record-list>
+      </div>
+      <div class="container-item" v-if="showInjectRecord">
+        <record-list :list="injectList"></record-list>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import clHeader from "../../../components/common/clHeader";
-import cellList from "../../../components/common/cell/cellList";
-import keypad from "../../../components/common/keypad/keypad";
+import clCell from "../../../components/common/cell/clCell";
+import recordList from "../../../components/record/recordList";
 export default {
-  components: {
-    clHeader,
-    cellList,
-    keypad
-  },
   data() {
     return {
-      keypadVisible: false
+      showReleaseRecord: false,
+      showInjectRecord: true,
+      injectList: [
+        { time: new Date().toLocaleString(), value: "-5000" },
+        { time: new Date().toLocaleString(), value: "-5000" },
+        { time: new Date().toLocaleString(), value: "-5000" },
+        { time: new Date().toLocaleString(), value: "-5000" },
+        { time: new Date().toLocaleString(), value: "-5000" }
+      ],
+      releaseList: [
+        { time: new Date().toLocaleString(), value: "+5000" },
+        { time: new Date().toLocaleString(), value: "+5000" },
+        { time: new Date().toLocaleString(), value: "+5000" },
+        { time: new Date().toLocaleString(), value: "+5000" },
+        { time: new Date().toLocaleString(), value: "+5000" },
+        { time: new Date().toLocaleString(), value: "+5000" },
+        { time: new Date().toLocaleString(), value: "+5000" },
+        { time: new Date().toLocaleString(), value: "+5000" },
+        { time: new Date().toLocaleString(), value: "+5000" },
+        { time: new Date().toLocaleString(), value: "+5000" },
+        { time: new Date().toLocaleString(), value: "+5000" },
+        { time: new Date().toLocaleString(), value: "+5000" },
+        { time: new Date().toLocaleString(), value: "+5000" },
+        { time: new Date().toLocaleString(), value: "+5000" },
+        { time: new Date().toLocaleString(), value: "+5000" },
+        { time: new Date().toLocaleString(), value: "+5000" },
+        { time: new Date().toLocaleString(), value: "+5000" },
+        { time: new Date().toLocaleString(), value: "+5000" },
+        { time: new Date().toLocaleString(), value: "+5000" },
+        { time: new Date().toLocaleString(), value: "+5000" },
+        { time: new Date().toLocaleString(), value: "+5000" },
+        { time: new Date().toLocaleString(), value: "+5000" },
+        { time: new Date().toLocaleString(), value: "+5000" }
+      ]
     };
   },
+  components: {
+    clHeader,
+    clCell,
+    recordList
+  },
   methods: {
-    getValue(num) {
-      console.log(num);
-    },
-    recharge() {
-      //   this.keypadVisible = !this.keypadVisible;
-      let constraints = {
-        video: { width: 500, height: 500 },
-        audio: true
-      };
-      let promise = navigator.mediaDevices.getUserMedia(constraints);
-      promise
-        .then(function(MediaStream) {
-          video.srcObject = MediaStream;
-          video.play();
-        })
-        .catch(function(PermissionDeniedError) {
-          console.log(PermissionDeniedError);
-        });
+    ontab() {
+      this.showReleaseRecord = !this.showReleaseRecord;
+      this.showInjectRecord = !this.showInjectRecord;
     }
   }
 };
 </script>
 
 <style lang="less" scoped>
-.swiper {
-  margin-top: 20px;
+.record-container {
+  .record-cell {
+    margin-top: 20px;
+  }
+  .tabbar {
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-between;
+    span {
+      height: 50px;
+      width: 165px;
+      line-height: 50px;
+      text-align: center;
+      font-size: 18px;
+    }
+    .link-active {
+      color: rgba(67, 161, 195, 1);
+      border-bottom: 4px solid rgba(67, 161, 195, 1);
+    }
+  }
+  .container-item,
+  .tabbar-container {
+    height: 100%;
+  }
 }
 </style>

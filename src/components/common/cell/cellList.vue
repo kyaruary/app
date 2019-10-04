@@ -6,7 +6,7 @@
       :title="item * 1000"
       type="single"
       :disable="(item * 1000) > limit"
-      :choose="item === choose"
+      :choose="item === choosed"
       :gutter="item != 9 ? 20:0"
       :cb="()=>{chooseItem(item)}"
     ></cl-cell>
@@ -18,23 +18,29 @@ import clCell from "./clCell";
 export default {
   data() {
     return {
-      choose: -1
+      choosed: -1
     };
   },
   components: {
     clCell
   },
-  computed: {},
   props: {
     limit: {
       type: Number,
       default: 9000
+    },
+    click: {
+      type: Function,
+      default: function() {
+        return () => false;
+      }
     }
   },
   methods: {
     chooseItem(index) {
       if (index * 1000 > this.limit) return false;
-      this.choose = index;
+      this.choosed = index;
+      this.click(index * 1000);
     }
   }
 };

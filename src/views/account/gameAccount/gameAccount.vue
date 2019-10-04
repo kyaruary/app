@@ -17,7 +17,10 @@
         <div class="re-title">释放时间(小时:分钟)</div>
         <div class="re-time">
           {{release_time}}
-          <button class="figure">查看</button>
+          <button
+            class="figure"
+            @click="()=>{this.$router.push('/account/game/releasetime')}"
+          >查看</button>
         </div>
       </div>
       <div class="benefit">
@@ -27,12 +30,12 @@
     </div>
 
     <div class="handle-groups">
-      <button class="release-btn">释放</button>
-      <button class="inject-btn">注入</button>
+      <cl-button :disable="true">释放</cl-button>
+      <cl-button :onclick="()=>{this.$router.push('/account/game/inject')}">注入</cl-button>
     </div>
 
     <div class="bottom-tip-rule">
-      <router-link to="/" tag="span">体力规则</router-link>
+      <router-link to="/account/game/rule" tag="span">体力规则</router-link>
     </div>
   </div>
 </template>
@@ -40,10 +43,12 @@
 <script>
 import clHeader from "../../../components/common/clHeader";
 import levelStar from "../../../components/common/levelStar";
+import clButton from "../../../components/common/button/clButton";
 export default {
   components: {
     clHeader,
-    levelStar
+    levelStar,
+    clButton
   },
   data() {
     return {
@@ -142,23 +147,6 @@ export default {
   align-items: center;
   height: 44px;
   margin-top: 40px;
-  button {
-    height: 44px;
-    @clear_border_outline();
-    margin: 0;
-    padding: 13px 32px;
-    width: 100px;
-    color: #fff;
-    border-radius: 12px;
-    font-weight: 900;
-  }
-  button.release-btn {
-    background-color: #000b27;
-    opacity: 0.2;
-  }
-  button.inject-btn {
-    background-color: #43a1c3;
-  }
 }
 .bottom-tip-rule {
   position: fixed;

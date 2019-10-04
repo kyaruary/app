@@ -1,7 +1,7 @@
 <template>
   <div class="c-header">
     <div class="left">
-      <img :src="backImg" class="back" @click="goback" />
+      <img :src="backArrow" class="back" @click="goback" />
     </div>
     <div class="title">{{title}}</div>
     <div class="right">
@@ -11,10 +11,11 @@
 </template>
 
 <script>
+import backArrow from "../../assets/p/common/backArrow.png";
 export default {
   data() {
     return {
-      backImg: "/picture/profile/back.png"
+      backArrow
     };
   },
   methods: {

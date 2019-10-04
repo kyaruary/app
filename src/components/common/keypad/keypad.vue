@@ -4,28 +4,44 @@
       v-for="n in 12"
       :key="n"
       @click="onClick(n)"
+      v-hammer:tap="ontap"
       :class="{
         'show_bottom_border':n < 10,
         'show_right_border': n%3 !== 0,
-        'show_blank':n ===10 || n === 12
+        'show_blank':n ===10 || n === 12,
     }"
     >
       <span v-if="changeUI(n) != 'back'">{{changeUI(n)}}</span>
-      <img v-else src />
+      <delete-btn v-else></delete-btn>
     </div>
   </div>
 </template>
 
 <script>
+import deleteBtn from "../svg/deleteBtn";
 export default {
+  data() {
+    return {
+      deleteBtn
+    };
+  },
+  components: {
+    deleteBtn
+  },
   props: {
     visible: {
       type: Boolean,
       defaule: false
     },
-    click: {
+    onclick: {
       type: Function,
       default() {
+        return () => false;
+      }
+    },
+    ondelete: {
+      type: Function,
+      default: function() {
         return () => false;
       }
     }
@@ -43,9 +59,21 @@ export default {
           return number;
       }
     },
-    onClick(num) {
-      this.click(num);
-    }
+    onClick(number) {
+      switch (number) {
+        case 11:
+          this.onclick(0);
+          break;
+        case 12:
+          this.ondelete();
+          break;
+        case 10:
+          break;
+        default:
+          this.onclick(number);
+      }
+    },
+    ontap() {}
   }
 };
 </script>
@@ -60,7 +88,6 @@ export default {
   box-sizing: border-box;
   left: 0;
   overflow: hidden;
-  //   border: 1px solid rgba(67, 161, 195, 1);
   border-right: none;
   box-sizing: border-box;
   div {
@@ -70,13 +97,12 @@ export default {
     color: rgba(0, 11, 39, 1);
     height: 50px;
     line-height: 50px;
-    font-size: 22px;
-    text-align: center;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
-    img {
-      height: 14px;
-      width: 20px;
-    }
+    transition: 0.3s;
     &::after,
     &::before {
       position: absolute;
@@ -84,6 +110,9 @@ export default {
       display: block;
       background-color: rgba(229, 229, 229, 1);
       box-sizing: border-box;
+    }
+    &:active {
+      background-color: rgba(229, 229, 229, 0.9);
     }
   }
   .show_bottom_border {

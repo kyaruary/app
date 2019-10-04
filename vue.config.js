@@ -9,18 +9,15 @@ module.exports = {
     chainWebpack: config => {
         config.module
             .rule('less')
-            .test(/\.less$/)
             .oneOf('vue')
             .resourceQuery(/\?vue/)
             .use('px2rem')
             .loader('px2rem-loader')
-            .before('less-loader')
+            .before('postcss-loader')
             .options({
-                remUnit: 16
-            })
-            .end();
+                remUnit: 16,
+                remRecision: 8
+            });
     },
     publicPath: '',
-    // assetsSubDirectory: '',
-    // assetsPublicPath: '',
 }

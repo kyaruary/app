@@ -1,15 +1,16 @@
 @useScope: global;
-@box_shadow_color: rgba(6, 149, 183, 0.06);
 @img_base_url: '/public/picture';
 
 @logo: @img_base_url+'/';
 
 
-@main_color_deep: rgba(67, 161, 195);
+@main_color: rgba(67, 161, 195, 1);
+@box_shadow_color: rgba(67, 161, 195, 0.1);
+@sec_color: rgba(0, 11, 39, 1);
 
 // methods
 @cell_box-shadow: {
-    box-shadow: 0 0 8px @box_shadow_color;
+    box-shadow: 0 0 4px @box_shadow_color;
 }
 
 @game_line_gradients: {
@@ -23,5 +24,5 @@
 @font-face {
     font-family: jane;
     // src: url("/font/Muyao-Softbrush.ttf");
-    src: url('/font/Mini Jane goose feather.ttf')
+    src: url('../../font/Mini Jane goose feather.ttf')
 }
