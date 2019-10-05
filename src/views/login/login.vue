@@ -2,9 +2,6 @@
   <div class="login-container container">
     <div class="brand"></div>
     <div class="brand1"></div>
-    <div class="tip f-s-15">
-      <span>{{tipMsg}}</span>
-    </div>
     <div class="g-c">
       <line-border>
         <input
@@ -18,6 +15,9 @@
     </div>
     <div class="g">
       <div class="login-btn" @click="submit">登录</div>
+    </div>
+    <div class="tip">
+      <span>{{tipMsg}}</span>
     </div>
     <div class="language"></div>
   </div>
@@ -58,14 +58,12 @@ export default {
           this.loginFlase = false;
         }, 5000);
       } else {
-        const user = await login({ secret: this.secret });
-        this.setUser(user);
-        window.localStorage.setItem("authToken", this.secret);
-        this.$router.push("/");
+        const success = await this.login({ secret: this.secret });
+        success ? this.$router.push("/") : console.log("login false");
       }
     },
     paste(e) {},
-    ...mapMutations(["setUser"])
+    ...mapActions(["login"])
   },
   computed: {
     tipMsg() {
@@ -101,24 +99,28 @@ export default {
   font-size: 18px;
   @base_font-family();
 }
-.g-c input::-moz-placeholder {
-  color: @white;
-  font-size: 15px;
-  @base_font-family();
-}
 .g-c input::-webkit-input-placeholder {
   color: @white;
   font-size: 15px;
   @base_font-family();
 }
-.g-c input::-ms-input-placeholder {
-  color: @white;
-  font-size: 15px;
-  @base_font-family();
-}
-
 .g-c {
   margin-bottom: 22px;
+  input::-webkit-input-placeholder {
+    color: @white;
+    font-size: 15px;
+    @base_font-family();
+  }
+  input::-moz-placeholder {
+    color: @white;
+    font-size: 15px;
+    @base_font-family();
+  }
+  input::-ms-input-placeholder {
+    color: @white;
+    font-size: 15px;
+    @base_font-family();
+  }
 }
 .g-c:last-of-type {
   margin-bottom: 0;
@@ -129,8 +131,8 @@ export default {
   line-height: 57px;
   text-align: center;
   @base_font-family();
-  background: url("../../assets/p/secret/bg_input.png") no-repeat;
-  background-size: 270px 52px;
+  background-image: url("../../assets/p/login/login_bg.png");
+  background-size: 270px 54px;
   margin: 78px auto 0;
   color: #fff;
   animation: breath_small 1.1s infinite alternate;
@@ -157,10 +159,12 @@ export default {
 }
 .tip {
   color: @white;
-  height: 15px;
   .text-shadow(red, 1px);
   @base_font-family();
   margin: 11px 0;
   text-align: center;
+  span {
+    font-size: 14px;
+  }
 }
 </style>

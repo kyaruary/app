@@ -9,6 +9,8 @@ import { VueHammer } from 'vue2-hammer'
 import 'normalize.css'
 import 'mint-ui/lib/style.css'
 import './assets/global.css';
+import { formatTime } from './util/filters/index';
+Vue.filter('formatTime', formatTime);
 Vue.config.productionTip = false
 Vue.use(Mint);
 Vue.use(VueClipBoard);

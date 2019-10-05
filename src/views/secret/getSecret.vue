@@ -3,13 +3,13 @@
     <div class="container z999">
       <div class="s-info">
         <p class="s-title">私钥</p>
-        <div class="flex f-group">
+        <div class="f-group">
           <p>{{secret | ellipse}}</p>
           <div class="cp-btn animate-b" @click="copy">复制</div>
         </div>
 
         <p class="s-title">推荐码</p>
-        <div class="flex f-group">
+        <div class="f-group">
           <p>{{recode}}</p>
         </div>
       </div>
@@ -20,8 +20,8 @@
         </line-border>
       </div>
 
-      <div class="flex flex-jcc">
-        <div class="s-btn animate-b_small"></div>
+      <div class="flex-jcc">
+        <div class="s-btn animate-b_small">climber 下载</div>
       </div>
     </div>
     <snow />
@@ -73,22 +73,27 @@ export default {
   position: relative;
 }
 .secret-container {
-  background-image: url("/picture/secret/background.jpg");
+  background-image: url("../../assets/p/secret/background.jpg");
   background-size: 375px;
   background-repeat: no-repeat;
   background-color: #d2e2e9;
   padding: 0 38px;
-}
-.secret-container p {
-  font-size: 16px;
-  margin: 0;
-  padding: 0;
-  @base_font-family();
+  p {
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    @base_font-family();
+  }
+  p.s-title {
+    margin-top: 32px;
+    font-size: 18px;
+    color: #ffdd4b;
+  }
 }
 .s-info {
   margin-top: 202px;
   border-radius: 14px;
-  background-image: url("/picture/secret/back1.png");
+  background-image: url("../../assets/p/secret/back1.png");
   background-size: 300px 200px;
   height: 200px;
   padding: 0 28px 28px;
@@ -96,40 +101,48 @@ export default {
   width: 300px;
   overflow: hidden;
 }
-.secret-container p.s-title {
-  margin-top: 32px;
-  font-size: 18px;
-  color: #ffdd4b;
-}
 .f-group {
+  display: flex;
+  justify-items: center;
+  justify-content: space-between;
   margin-top: 16px;
+  p {
+    color: #ffffff;
+  }
 }
-.f-group p {
-  color: #ffffff;
+.s-tip {
+  p {
+    color: #f40305;
+    font-size: 14px;
+    text-align: center;
+  }
 }
-.s-tip p {
-  color: #ffdd4b;
-  font-size: 14px;
-  text-align: center;
-}
-.s-btn {
-  margin-top: 65px;
-  background-image: url("/picture/secret/climber.2.png");
-  box-sizing: border-box;
-  background-size: contain;
-  height: 52px;
-  width: 240px;
+.flex-jcc {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .s-btn {
+    margin-top: 65px;
+    background-image: url("../../assets/p/login/login_bg.png");
+    background-size: 272px 54px;
+    height: 54px;
+    width: 272px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 20px;
+  }
 }
 
-@suqare24: 24px;
 .cp-btn {
-  height: @suqare24;
-  width: @suqare24;
-  line-height: @suqare24;
-  background-image: url("/picture/secret/copy.png");
-  background-size: contain;
-  border-radius: 50%;
-  font-size: 11px;
+  .square(24px);
+  line-height: 24px;
+  background-color: #edca40;
+  border-radius: 9.6px;
+  font-size: 9.6px;
+  color: #fff;
+  .text-shadow(1px, #edca40);
   white-space: nowrap;
   @base_font-family();
 }

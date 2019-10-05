@@ -11,12 +11,12 @@
           :cb="item.cb?item.cb:()=>{}"
         >{{item.title}}</cl-link>
       </div>
-      <pool :rest="rest" :total="total" />
+      <cl-pool />
     </div>
     <div class="game-status">
       <div class="status-tips">
         <div class="status-time">
-          <span>{{status_time}}</span>
+          <span>{{re_time | formatTime}}</span>
           <span>小时:分钟</span>
         </div>
         <div class="status-ph">
@@ -31,16 +31,15 @@
 
 <script>
 import clLink from "../../components/common/clLink";
-import pool from "../../components/common/pool";
+import clPool from "../../components/common/pool";
 import clSide from "../../components/sidebar/clSide";
-import { mapMutations } from "vuex";
+import { mapMutations, mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
-      rest: 105000,
-      total: 200000,
-      status_time: "200:19",
-      status_ph: 2000,
+      status_timestamps: 0,
+      status_ph: 0,
+      re_time: 0,
       navs: [
         {
           title: "钱包",
@@ -63,11 +62,34 @@ export default {
   },
   components: {
     clLink,
-    pool,
+    clPool,
     clSide
   },
   methods: {
-    ...mapMutations(["showSidebar"])
+    ...mapMutations(["showSidebar", "setUser"]),
+    ...mapActions(["getBill"])
+  },
+  async mounted() {
+    if (this.user.username == "") {
+      // 如果不是当前登录 取缓存
+      let cache_user = window.localStorage.getItem("currentUser");
+      cache_user
+        ? this.setUser(JSON.parse(cache_user))
+        : console.log("need login");
+    }
+    await this.getBill(this.user.user_id);
+    this.status_timestamps = this.bill_detail.release_time;
+    this.status_ph = this.bill_detail.ph;
+    this.re_time = this.status_timestamps - new Date().getTime();
+    setInterval(() => {
+      this.re_time = this.status_timestamps - new Date().getTime();
+    }, 1000);
+  },
+  computed: {
+    ...mapState(["user", "bill"]),
+    bill_detail() {
+      return this.bill.detail;
+    }
   }
 };
 </script>

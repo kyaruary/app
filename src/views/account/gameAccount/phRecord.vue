@@ -23,43 +23,17 @@
 import clHeader from "../../../components/common/clHeader";
 import clCell from "../../../components/common/cell/clCell";
 import recordList from "../../../components/record/recordList";
+import { getInjectRecord, getReleaseRecord } from "../../../service/record";
+import { mapState } from "vuex";
 export default {
   data() {
     return {
       showReleaseRecord: false,
       showInjectRecord: true,
-      injectList: [
-        { time: new Date().toLocaleString(), value: "-5000" },
-        { time: new Date().toLocaleString(), value: "-5000" },
-        { time: new Date().toLocaleString(), value: "-5000" },
-        { time: new Date().toLocaleString(), value: "-5000" },
-        { time: new Date().toLocaleString(), value: "-5000" }
-      ],
-      releaseList: [
-        { time: new Date().toLocaleString(), value: "+5000" },
-        { time: new Date().toLocaleString(), value: "+5000" },
-        { time: new Date().toLocaleString(), value: "+5000" },
-        { time: new Date().toLocaleString(), value: "+5000" },
-        { time: new Date().toLocaleString(), value: "+5000" },
-        { time: new Date().toLocaleString(), value: "+5000" },
-        { time: new Date().toLocaleString(), value: "+5000" },
-        { time: new Date().toLocaleString(), value: "+5000" },
-        { time: new Date().toLocaleString(), value: "+5000" },
-        { time: new Date().toLocaleString(), value: "+5000" },
-        { time: new Date().toLocaleString(), value: "+5000" },
-        { time: new Date().toLocaleString(), value: "+5000" },
-        { time: new Date().toLocaleString(), value: "+5000" },
-        { time: new Date().toLocaleString(), value: "+5000" },
-        { time: new Date().toLocaleString(), value: "+5000" },
-        { time: new Date().toLocaleString(), value: "+5000" },
-        { time: new Date().toLocaleString(), value: "+5000" },
-        { time: new Date().toLocaleString(), value: "+5000" },
-        { time: new Date().toLocaleString(), value: "+5000" },
-        { time: new Date().toLocaleString(), value: "+5000" },
-        { time: new Date().toLocaleString(), value: "+5000" },
-        { time: new Date().toLocaleString(), value: "+5000" },
-        { time: new Date().toLocaleString(), value: "+5000" }
-      ]
+      injectList: [],
+      releaseList: [],
+      injectPn: 0,
+      releasePn: 0
     };
   },
   components: {
@@ -71,7 +45,26 @@ export default {
     ontab() {
       this.showReleaseRecord = !this.showReleaseRecord;
       this.showInjectRecord = !this.showInjectRecord;
+    },
+    async getInjectList() {
+      const data = await getInjectRecord(this.user.user_id, this.injectPn);
+      this.injectList = data;
+      this.injectPn++;
+    },
+    async getReleaseList() {
+      this.releaseList = await getReleaseRecord(
+        this.user.user_id,
+        this.releasePn
+      );
+      this.injectPn++;
     }
+  },
+  async mounted() {
+    this.getInjectList();
+    this.getReleaseList();
+  },
+  computed: {
+    ...mapState(["user"])
   }
 };
 </script>

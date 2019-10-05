@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="level-star-c">
-        <level-star :level="6"></level-star>
+        <level-star :level="+bill.detail.speed_level"></level-star>
       </div>
       <div class="account-link">
         <div class="game-account" @click="()=>{this.$router.push('/account/game')}">
@@ -53,7 +53,7 @@ export default {
     cellGroup
   },
   computed: {
-    ...mapState(["user", "cmpstate"])
+    ...mapState(["user", "cmpstate", "bill"])
   },
   mounted() {
     var self = this;

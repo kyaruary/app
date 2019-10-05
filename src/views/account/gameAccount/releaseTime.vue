@@ -20,6 +20,8 @@
 import clHeader from "../../../components/common/clHeader";
 import clCell from "../../../components/common/cell/clCell";
 import releaseList from "../../../components/record/releaseList";
+import { getAccelerationTime } from "../../../service/record";
+import { mapState } from "vuex";
 export default {
   components: {
     clHeader,
@@ -28,16 +30,14 @@ export default {
   },
   data() {
     return {
-      releaselist: [
-        { nickname: "climber", time: "2:21" },
-        { nickname: "climber", time: "2:21" },
-        { nickname: "climber", time: "2:21" },
-        { nickname: "climber", time: "2:21" },
-        { nickname: "climber", time: "2:21" },
-        { nickname: "climber", time: "2:21" },
-        { nickname: "climber", time: "2:21" }
-      ]
+      releaselist: []
     };
+  },
+  async mounted() {
+    this.releaselist = await getAccelerationTime(this.user.user_id);
+  },
+  computed: {
+    ...mapState(["user"])
   }
 };
 </script>

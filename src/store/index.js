@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { user } from './user'
-import { secret } from './secret'
 import { cmpstate } from './cmpstate'
+import { bill } from './bill'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
-    secret,
     user,
-    cmpstate
+    cmpstate,
+    bill
   }
 })

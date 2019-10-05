@@ -1,6 +1,6 @@
 <template>
   <div class="record-item">
-    <div class="left">{{time}}</div>
+    <div class="left">{{time | format}}</div>
     <div class="right">{{value}}</div>
   </div>
 </template>
@@ -9,12 +9,17 @@
 export default {
   props: {
     time: {
-      type: String,
+      type: String | Number,
       default: ""
     },
     value: {
-      type: String,
+      type: String | Number,
       default: ""
+    }
+  },
+  filters: {
+    format(time) {
+      return new Date(time).toLocaleString();
     }
   }
 };

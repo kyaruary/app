@@ -9,27 +9,22 @@
 
 <script>
 import Wave from "canvas-waves";
+import { getPool } from "../../service/pool";
 export default {
   data() {
     return {
       wave: null,
-      baseHeight: (this.rest / this.total) * 100 - 10 + "%"
+      rest: 12000,
+      total: 100000
     };
   },
-  props: {
-    total: {
-      type: Number,
-      default: 100
-    },
-    rest: {
-      type: Number,
-      default: 60
-    }
-  },
-  mounted() {
+  async mounted() {
+    const pool = await getPool();
+    this.rest = pool.rest;
+    this.total = pool.total;
     this.wave = Wave.create(".cl-pool", {
       color: "#348bfb",
-      baseHeight: this.baseHeight,
+      baseHeight: (pool.rest / pool.total) * 100 - 10 + "%",
       waveHeight: "10%",
       speed: 5000
     });

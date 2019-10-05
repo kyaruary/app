@@ -6,7 +6,7 @@
 
     <div class="acc-level">
       <span class="level-title">加速星级:</span>
-      <level-star :level="level"></level-star>
+      <level-star :level="+detail.speed_level"></level-star>
     </div>
 
     <p class="amount-title">本单体力</p>
@@ -16,7 +16,7 @@
       <div class="release">
         <div class="re-title">释放时间(小时:分钟)</div>
         <div class="re-time">
-          {{release_time}}
+          {{re_time| formatTime}}
           <button
             class="figure"
             @click="()=>{this.$router.push('/account/game/releasetime')}"
@@ -25,7 +25,7 @@
       </div>
       <div class="benefit">
         <div class="be-title">当前体力收益</div>
-        <div class="be-num">{{benefit}}</div>
+        <div class="be-num">{{detail.benefit}}</div>
       </div>
     </div>
 
@@ -44,6 +44,7 @@
 import clHeader from "../../../components/common/clHeader";
 import levelStar from "../../../components/common/levelStar";
 import clButton from "../../../components/common/button/clButton";
+import { mapState } from "vuex";
 export default {
   components: {
     clHeader,
@@ -52,10 +53,19 @@ export default {
   },
   data() {
     return {
-      level: 6,
-      release_time: "222:14",
-      benefit: 90
+      detail: {},
+      re_time: new Date().getTime()
     };
+  },
+  mounted() {
+    this.detail = this.bill.detail;
+    this.re_time = this.detail.release_time - new Date().getTime();
+    setInterval(() => {
+      this.re_time = this.detail.release_time - new Date().getTime();
+    }, 1000);
+  },
+  computed: {
+    ...mapState(["bill"])
   }
 };
 </script>

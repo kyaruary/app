@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const jwt = require('jsonwebtoken');
 router.get('/', (req, res) => {
     const data = []
     res.send();
@@ -7,14 +8,28 @@ router.get('/', (req, res) => {
 router.post('/login', (req, res) => {
     const user = {
         username: 'alex',
-        user_id: 'dasodaj',
-        avator: '/',
+        user_id: 'AS7d3',
+        avator: null,
         state: '1',
     }
-    res.send(user);
+    const token = jwt.sign(user, 'climber');
+    const secret = req.body.secret;
+    if (secret == 'hjajdhahhs123455241231nieidhaj') {
+        res.send({
+            code: 0,
+            data: {
+                ...user,
+                token
+            }
+        })
+    } else {
+        res.send({
+            code: 1
+        })
+    }
 });
 
-router.post('/update', (req, res) => {
+router.post('/pay', (req, res) => {
     res.send();
 });
 

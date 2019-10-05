@@ -17,7 +17,11 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
     const token = window.localStorage.getItem('authToken');
     if (token) {
-        next();
+        if (to.path === '/login') {
+            next('/')
+        } else {
+            next();
+        }
     } else {
         if (to.matched[0].meta.auth) {
             next('/login')
