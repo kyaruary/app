@@ -12,6 +12,7 @@ import './assets/global.css';
 import { formatTime } from './util/filters/index';
 Vue.filter('formatTime', formatTime);
 Vue.config.productionTip = false
+Vue.prototype.$bus = new Vue();
 Vue.use(Mint);
 Vue.use(VueClipBoard);
 Vue.use(VueCorvova);

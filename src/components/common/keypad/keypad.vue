@@ -90,6 +90,7 @@ export default {
   overflow: hidden;
   border-right: none;
   box-sizing: border-box;
+  box-shadow: -1px 0 3px #fff;
   div {
     width: 125px;
     flex-shrink: 0;

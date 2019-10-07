@@ -42,7 +42,7 @@ export default {
       default: ""
     },
     count: {
-      type: Number,
+      type: Number | String,
       default: 0
     },
     onclose: {

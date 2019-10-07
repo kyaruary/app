@@ -20,11 +20,19 @@ export default {
   },
   methods: {
     goback() {
-      this.$router.go(-1);
+      if (this.to) {
+        this.$router.push(this.to);
+      } else {
+        this.$router.go(-1);
+      }
     }
   },
   props: {
     title: {
+      type: String,
+      default: ""
+    },
+    to: {
       type: String,
       default: ""
     }
@@ -33,7 +41,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@align-width: 80px;
+@align-width: 100px;
 .c-header {
   min-height: 44px;
   background-color: #fff;

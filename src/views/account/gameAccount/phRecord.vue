@@ -5,15 +5,15 @@
       <cl-cell type="large" title="总计体力" :count="'20000'"></cl-cell>
     </div>
     <div class="tabbar">
-      <span :class="{'link-active':showInjectRecord}" @click="ontab">注入记录</span>
-      <span :class="{'link-active':showReleaseRecord}" @click="ontab">释放记录</span>
+      <span :class="{'link-active':showInjectRecord}" @click="ontab(1)">注入记录</span>
+      <span :class="{'link-active':showReleaseRecord}" @click="ontab(2)">释放记录</span>
     </div>
     <div class="tabbar-container">
       <div class="container-item" v-if="showReleaseRecord">
-        <record-list :list="releaseList"></record-list>
+        <record-list :list="releaseList" op="-"></record-list>
       </div>
       <div class="container-item" v-if="showInjectRecord">
-        <record-list :list="injectList"></record-list>
+        <record-list :list="injectList" op="+"></record-list>
       </div>
     </div>
   </div>
@@ -42,7 +42,19 @@ export default {
     recordList
   },
   methods: {
-    ontab() {
+    ontab(type) {
+      switch (type) {
+        case 1:
+          if (this.showInjectRecord == true) {
+            return;
+          }
+          break;
+        case 2:
+          if (this.showReleaseRecord == true) {
+            return;
+          }
+          break;
+      }
       this.showReleaseRecord = !this.showReleaseRecord;
       this.showInjectRecord = !this.showInjectRecord;
     },
@@ -59,7 +71,7 @@ export default {
       this.injectPn++;
     }
   },
-  async mounted() {
+  mounted() {
     this.getInjectList();
     this.getReleaseList();
   },

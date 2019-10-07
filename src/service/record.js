@@ -8,6 +8,11 @@ export const getInjectRecord = async (id, pn) => {
 export const getReleaseRecord = async (id, pn) => {
     return axios.get('/record/release/' + id, { params: { pn } });
 }
+
 export const getAccelerationTime = async (id) => {
     return axios.get('/record/acceleration_time/' + id);
+}
+
+export const getRechargeRecord = async () => {
+    return axios.get('/record/recharge/');
 }

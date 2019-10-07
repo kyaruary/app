@@ -1,0 +1,230 @@
+#%RAML 1.0
+    title: climber api
+    baseUri: http://localhost:3000/api
+    version: v1
+    /auth:
+        /login:
+            post:
+                body:
+                    example: |
+                        {
+                            "secret": "hjajdhahhs123455241231nieidhaj"
+                        }
+                responses:
+                    200:
+                        body:
+                            example: |
+                                {
+                                    "username": "climber",
+                                    "user_id": "SD7a4",
+                                    "avator": "http://localhost/public/avator.png",
+                                    "user_state": "是否设置了密码 1 | 0",
+                                    "token": "token"
+                                }
+        /setpassword:
+            post:
+                body:
+                    example: |
+                        {
+                            "password": "123456"
+                        }
+                responses:
+                    200:
+                        body:
+                            example: |
+                                {
+                                    "code":0
+                                }
+        /resetpassword:
+            post:
+                body:
+                    example: |
+                        {
+                            "old_password": "123456",
+                            "new_password": "123456"   
+                        }
+                responses:
+                    200:
+                        body:
+                            example: |
+                                {
+                                    "code":0
+                                }
+        /update:
+            post:
+                body:
+                    example: |
+                        {
+                            username: ''
+                            avator:file
+                        }
+                responses:
+                    200:
+                        body:
+                            example: |
+                                {
+                                    "code":0
+                                }
+    /bill:
+        get:
+            responses:
+                200:
+                    body:
+                        example: |
+                            {
+                                "code": 0,
+                                "data": 
+                                    {
+                                        release_time: timestamp,
+                                        speed_level: '3',
+                                        ph: '2000 //本单体力值',
+                                        layer: '4 //当前层级',
+                                        benefit: '80 //当前收益',
+                                        acceleration_time: "23:32 // 已经加速的时间"
+                                    }
+                            }
+    /feedback:
+        get:
+            responses:
+                200:
+                    body:
+                        example: |
+                            {
+                                "code": 0,
+                                "data": "[{question: '用户反馈',answer: '回复',state: '是否回复 1|0'}]"
+                            }
+        post:
+            body:
+                example: |
+                    {
+                        question: '用户反馈问题'
+                    }
+            responses:
+                200:
+                    body:
+                        example: |
+                            {
+                                code: 0
+                            }
+    /notice:
+        get:
+            responses:
+                200:
+                    body:
+                        example: |
+                            {
+                                "code": 0,
+                                "data": '公告信息'
+                            }
+    /pay:
+        /release:
+            post:
+                body:
+                    example: |
+                        {
+                            address: '释放地址',
+                            count: '释放数量',
+                            password: '123456'
+                        }
+                responses:
+                    200:
+                        body:
+                            example : |
+                                {
+                                    "code": 0
+                                }
+        /inject:
+            post:
+                body:
+                    example: |
+                        {
+                            count: '注入体力数量',
+                            password: '123456'
+                        }
+                responses:
+                    200:
+                        body:
+                            example : |
+                                {
+                                    "code": 0
+                                }
+        /vbm:
+            post:
+                body:
+                    example: |
+                        {
+                            count: '充值金额',
+                            password: '123456'
+                        }
+                responses:
+                    200:
+                        body:
+                            example : |
+                                {
+                                    "code": 0
+                                }
+    /pool:
+        get:
+            responses:
+                200:
+                    body:
+                        example: |
+                            {
+                                total: '体力池总数',
+                                rest: '剩余体力数'
+                            }
+    /record:
+        /release:
+            description: 体力释放记录
+            get:
+                responses:
+                    200:
+                        body:
+                            example : |
+                                {
+                                    code: 0,
+                                    data: [{time:释放时间,count:释放体力数量}]
+                                }
+        /inject:
+            description: 体力注入记录
+            get:
+                responses:
+                    200:
+                        body:
+                            example : |
+                                {
+                                    code: 0,
+                                    data: [{time:注入时间,count:注入体力数量}]
+                                }
+        /vbm:
+            description: vbm充值记录
+            get:
+                responses:
+                    200:
+                        body:
+                            example : |
+                                {
+                                    code: 0,
+                                    data: [{time:充值时间,count:充值金额,order:充值单号}]
+                                }
+        /acceleration_time:
+            /{id}:
+                get:
+                    responses:
+                        200:
+                            body:
+                                example: |
+                                    {
+                                        code: 0,
+                                        data: [{username:昵称,user_id:id,accelerate_time:已加速时间,level:用户加速等级}]
+                                    }
+    /vbm:
+        get:
+            responses:
+                200:
+                    body:
+                        example : |
+                            {
+                                code:0,
+                                data: 1000 //vmb数量
+                            }

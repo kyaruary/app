@@ -3,9 +3,9 @@
     <div class="nick-line">
       <div class="nick">
         <span>{{nickname}}</span>
-        <level-star :level="6"></level-star>
+        <level-star :level="level"></level-star>
       </div>
-      <div class="goto">查看</div>
+      <div class="goto" @click="toNext(nickname,level)">查看</div>
     </div>
     <div class="speed-line">
       <span class="desc">已为您加速(小时:分钟)</span>
@@ -17,9 +17,14 @@
 <script>
 import levelStar from "../common/levelStar";
 export default {
-  props: ["time", "nickname"],
+  props: ["time", "nickname", "level"],
   components: {
     levelStar
+  },
+  methods: {
+    toNext(nickname, level) {
+      this.$router.push(`/account/game/releasenext/${nickname}?level=${level}`);
+    }
   }
 };
 </script>

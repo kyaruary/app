@@ -6,3 +6,26 @@ body,
   overflow: hidden;
   box-sizing: border-box;
 }
+
+.con-p-20-15 {
+  padding: 20px 15px 0;
+}
+
+.mint-msgbox {
+  border-radius: 12px;
+}
+
+.mint-msgbox-title {
+  min-height: 40px;
+  line-height: 40px;
+}
+
+.mint-msgbox-cancel {
+  border: none;
+  color: #000B27;
+  opacity: 0.2;
+}
+
+.mint-msgbox-btn {
+  font-size: 14px;
+}

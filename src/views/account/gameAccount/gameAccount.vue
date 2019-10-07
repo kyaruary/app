@@ -1,6 +1,6 @@
 <template>
   <div class="container gc-container con-p-20-15">
-    <cl-header title="游戏账户">
+    <cl-header title="游戏账户" to="/">
       <router-link to="/account/game/record" tag="span" slot="right">体力记录</router-link>
     </cl-header>
 
@@ -10,7 +10,7 @@
     </div>
 
     <p class="amount-title">本单体力</p>
-    <p class="current-amount">1000</p>
+    <p class="current-amount">{{detail.ph}}</p>
 
     <div class="layout-br">
       <div class="release">
@@ -30,8 +30,8 @@
     </div>
 
     <div class="handle-groups">
-      <cl-button :disable="true">释放</cl-button>
-      <cl-button :onclick="()=>{this.$router.push('/account/game/inject')}">注入</cl-button>
+      <cl-button :disable="!canRelease" :onclick="release" type="black">释放</cl-button>
+      <cl-button :onclick="inject">注入</cl-button>
     </div>
 
     <div class="bottom-tip-rule">
@@ -44,6 +44,7 @@
 import clHeader from "../../../components/common/clHeader";
 import levelStar from "../../../components/common/levelStar";
 import clButton from "../../../components/common/button/clButton";
+import { MessageBox } from "mint-ui";
 import { mapState } from "vuex";
 export default {
   components: {
@@ -54,18 +55,55 @@ export default {
   data() {
     return {
       detail: {},
-      re_time: new Date().getTime()
+      re_time: new Date().getTime(),
+      timer: -1
     };
   },
   mounted() {
     this.detail = this.bill.detail;
     this.re_time = this.detail.release_time - new Date().getTime();
-    setInterval(() => {
+    this.timer = setInterval(() => {
       this.re_time = this.detail.release_time - new Date().getTime();
     }, 1000);
   },
   computed: {
-    ...mapState(["bill"])
+    ...mapState(["bill", "vbm", "user"]),
+    canRelease() {
+      return this.re_time <= 0;
+    }
+  },
+  destroyed() {
+    window.clearInterval(this.timer);
+  },
+  methods: {
+    release() {
+      this.$router.push("/account/game/releaseph");
+    },
+    inject() {
+      if (this.user.user_state == "1") {
+        MessageBox({
+          title: "您还没有交易密码,请去设置",
+          showCancelButton: true,
+          confirmButtonText: "去充值"
+        }).then(val => {
+          if (val === "confirm") {
+            this.$router.push("/password/set");
+          }
+        });
+      } else if (this.vbm.count == 0) {
+        MessageBox({
+          title: "您的vmb不足,无法注入体力",
+          showCancelButton: true,
+          confirmButtonText: "去充值"
+        }).then(val => {
+          if (val === "confirm") {
+            this.$router.push("/account/bcoin");
+          }
+        });
+      } else {
+        this.$router.push("/account/game/inject");
+      }
+    }
   }
 };
 </script>

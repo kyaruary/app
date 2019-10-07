@@ -4,7 +4,7 @@
       v-for="(item , index) in list"
       :key="item.time + item.value + index"
       :time="item.time"
-      :value="item.value"
+      :value="op + item.value"
     ></record-item>
   </div>
 </template>
@@ -21,6 +21,10 @@ export default {
       default() {
         return [];
       }
+    },
+    op: {
+      type: String,
+      default: ""
     }
   }
 };

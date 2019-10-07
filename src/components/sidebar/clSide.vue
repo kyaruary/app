@@ -9,7 +9,7 @@
           <div class="username">{{user.username}}</div>
           <div class="userid">ID:{{user.user_id}}</div>
         </div>
-        <div class="exchange-icon">
+        <div class="exchange-icon" @click="()=>{this.$router.push('/account/exchange')}">
           <img :src="accountExchangeIcon" />
         </div>
       </div>

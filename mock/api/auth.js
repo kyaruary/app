@@ -1,16 +1,11 @@
 const router = require('express').Router();
 const jwt = require('jsonwebtoken');
-router.get('/', (req, res) => {
-    const data = []
-    res.send();
-});
-
 router.post('/login', (req, res) => {
     const user = {
         username: 'alex',
         user_id: 'AS7d3',
         avator: null,
-        state: '1',
+        user_state: '1',
     }
     const token = jwt.sign(user, 'climber');
     const secret = req.body.secret;
@@ -29,8 +24,12 @@ router.post('/login', (req, res) => {
     }
 });
 
-router.post('/pay', (req, res) => {
-    res.send();
+router.post('/setpassword', (req, res) => {
+    res.send({ code: 0, data: '2' });
+});
+
+router.post('/resetpassword', (req, res) => {
+    res.send({ code: 0, data: '2' });
 });
 
 

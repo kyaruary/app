@@ -9,7 +9,7 @@ export const home = {
         auth: true
     },
     children: [{
-        path: "",
+        path: "/",
         component: Home
     }, account]
 };

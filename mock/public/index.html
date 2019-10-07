@@ -1,0 +1,275 @@
+<!DOCTYPE HTML><html><head><title>climber api API documentation</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="generator" content="https://github.com/raml2html/raml2html 7.4.0"><link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"><script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script><script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script><script type="text/javascript">
+      $(document).ready(function() {
+  $('.page-header pre code, .top-resource-description pre code, .modal-body pre code').each(function(i, block) {
+    hljs.highlightBlock(block);
+  });
+
+  $('[data-toggle]').click(function() {
+    var selector = $(this).data('target') + ' pre code';
+    $(selector).each(function(i, block) {
+      hljs.highlightBlock(block);
+    });
+  });
+
+  // open modal on hashes like #_action_get
+  $(window).bind('hashchange', function(e) {
+    var anchor_id = document.location.hash.substr(1); //strip #
+    var element = $('#' + anchor_id);
+
+    // do we have such element + is it a modal?  --> show it
+    if (element.length && element.hasClass('modal')) {
+      element.modal('show');
+    }
+  });
+
+  // execute hashchange on first page load
+  $(window).trigger('hashchange');
+
+  // remove url fragment on modal hide
+  $('.modal').on('hidden.bs.modal', function() {
+    try {
+      if (history && history.replaceState) {
+          history.replaceState({}, '', '#');
+      }
+    } catch(e) {}
+  });
+});
+    </script><style>
+      .hljs {
+  background: transparent;
+}
+.parent {
+  color: #999;
+}
+.list-group-item > .badge {
+  float: none;
+  margin-right: 6px;
+}
+.panel-title > .methods {
+  float: right;
+}
+.badge {
+  border-radius: 0;
+  text-transform: uppercase;
+  width: 70px;
+  font-weight: normal;
+  color: #f3f3f6;
+  line-height: normal;
+}
+.badge_get {
+  background-color: #63a8e2;
+}
+.badge_post {
+  background-color: #6cbd7d;
+}
+.badge_put {
+  background-color: #22bac4;
+}
+.badge_delete {
+  background-color: #d26460;
+}
+.badge_patch {
+  background-color: #ccc444;
+}
+.list-group,
+.panel-group {
+  margin-bottom: 0;
+}
+.panel-group .panel+.panel-white {
+  margin-top: 0;
+}
+.panel-group .panel-white {
+  border-bottom: 1px solid #F5F5F5;
+  border-radius: 0;
+}
+.panel-white:last-child {
+  border-bottom-color: white;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.panel-white .panel-heading {
+  background: white;
+}
+.tab-pane ul {
+  padding-left: 2em;
+}
+.tab-pane h1 {
+  font-size: 1.3em;
+}
+.tab-pane h2 {
+  font-size: 1.2em;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #ddd;
+}
+.tab-pane h3 {
+  font-size: 1.1em;
+}
+.tab-content {
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+}
+#sidebar {
+  margin-top: 30px;
+  padding-right: 5px;
+  overflow: auto;
+  height: 90%;
+}
+.top-resource-description {
+  border-bottom: 1px solid #ddd;
+  background: #fcfcfc;
+  padding: 15px 15px 0 15px;
+  margin: -15px -15px 10px -15px;
+}
+.resource-description {
+  border-bottom: 1px solid #fcfcfc;
+  background: #fcfcfc;
+  padding: 15px 15px 0 15px;
+  margin: -15px -15px 10px -15px;
+}
+.resource-description p:last-child {
+  margin: 0;
+}
+.list-group .badge {
+  float: left;
+}
+.method_description {
+  margin-left: 85px;
+}
+.method_description p:last-child {
+  margin: 0;
+}
+.list-group-item {
+  cursor: pointer;
+}
+.list-group-item:hover {
+  background-color: #f5f5f5;
+}
+pre code {
+  overflow: auto;
+  word-wrap: normal;
+  white-space: pre;
+}
+.items {
+  background: #f5f5f5;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 9.5px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.42857143;
+}
+.examples {
+  margin-left: 0.5em;
+}
+.resource-modal li > ul {
+  margin-bottom: 1em;
+}
+.required {
+  color: #f00;
+}
+    </style></head><body data-spy="scroll" data-target="#sidebar"><div class="container"><div class="row"><div class="col-md-9" role="main"><div class="page-header"><h1>climber api API documentation <small>version v1</small></h1><p>http://localhost:3000/api</p></div><div class="panel panel-default"><div class="panel-heading"><h3 id="auth" class="panel-title">/auth</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_auth_login"><span class="parent">/auth</span>/login</a> <span class="methods"><a href="#auth_login_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_auth_login" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#auth_login_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="auth_login_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/auth</span>/login</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#auth_login_post_request" data-toggle="tab">Request</a></li><li><a href="#auth_login_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="auth_login_post_request"><h3>Body</h3><p><strong>Media type</strong>: example</p><p><strong>Type</strong>:</p><pre><code>{
+    "secret": "hjajdhahhs123455241231nieidhaj"
+}
+</code></pre></div><div class="tab-pane" id="auth_login_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: example</p><p><strong>Type</strong>:</p><pre><code>{
+    "username": "climber",
+    "user_id": "SD7a4",
+    "avator": "http://localhost/public/avator.png",
+    "user_state": "是否设置了密码 1 | 0",
+    "token": "token"
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_auth_setpassword"><span class="parent">/auth</span>/setpassword</a> <span class="methods"><a href="#auth_setpassword_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_auth_setpassword" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#auth_setpassword_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="auth_setpassword_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/auth</span>/setpassword</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#auth_setpassword_post_request" data-toggle="tab">Request</a></li><li><a href="#auth_setpassword_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="auth_setpassword_post_request"><h3>Body</h3><p><strong>Media type</strong>: example</p><p><strong>Type</strong>:</p><pre><code>{
+    "password": "123456"
+}
+</code></pre></div><div class="tab-pane" id="auth_setpassword_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: example</p><p><strong>Type</strong>:</p><pre><code>{
+    "code":0
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_auth_resetpassword"><span class="parent">/auth</span>/resetpassword</a> <span class="methods"><a href="#auth_resetpassword_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_auth_resetpassword" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#auth_resetpassword_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="auth_resetpassword_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/auth</span>/resetpassword</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#auth_resetpassword_post_request" data-toggle="tab">Request</a></li><li><a href="#auth_resetpassword_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="auth_resetpassword_post_request"><h3>Body</h3><p><strong>Media type</strong>: example</p><p><strong>Type</strong>:</p><pre><code>{
+    "old_password": "123456",
+    "new_password": "123456"   
+}
+</code></pre></div><div class="tab-pane" id="auth_resetpassword_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: example</p><p><strong>Type</strong>:</p><pre><code>{
+    "code":0
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_auth_update"><span class="parent">/auth</span>/update</a> <span class="methods"><a href="#auth_update_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_auth_update" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#auth_update_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="auth_update_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/auth</span>/update</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#auth_update_post_request" data-toggle="tab">Request</a></li><li><a href="#auth_update_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="auth_update_post_request"><h3>Body</h3><p><strong>Media type</strong>: example</p><p><strong>Type</strong>:</p><pre><code>{
+    username: &#39;&#39;
+    avator:file
+}
+</code></pre></div><div class="tab-pane" id="auth_update_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: example</p><p><strong>Type</strong>:</p><pre><code>{
+    "code":0
+}
+</code></pre></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="bill" class="panel-title">/bill</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_bill"><span class="parent"></span>/bill</a> <span class="methods"><a href="#bill_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_bill" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#bill_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="bill_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/bill</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#bill_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="bill_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: example</p><p><strong>Type</strong>:</p><pre><code>{
+    "code": 0,
+    "data": 
+        {
+            release_time: timestamp,
+            speed_level: &#39;3&#39;,
+            ph: &#39;2000 //本单体力值&#39;,
+            layer: &#39;4 //当前层级&#39;,
+            benefit: &#39;80 //当前收益&#39;,
+            acceleration_time: "23:32 // 已经加速的时间"
+        }
+}
+</code></pre></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="feedback" class="panel-title">/feedback</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_feedback"><span class="parent"></span>/feedback</a> <span class="methods"><a href="#feedback_get"><span class="badge badge_get">get</span></a> <a href="#feedback_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_feedback" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#feedback_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"></div><div class="clearfix"></div></div><div onclick="window.location.href = '#feedback_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="feedback_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/feedback</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#feedback_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="feedback_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: example</p><p><strong>Type</strong>:</p><pre><code>{
+    "code": 0,
+    "data": "[{question: &#39;用户反馈&#39;,answer: &#39;回复&#39;,state: &#39;是否回复 1|0&#39;}]"
+}
+</code></pre></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="feedback_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/feedback</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#feedback_post_request" data-toggle="tab">Request</a></li><li><a href="#feedback_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="feedback_post_request"><h3>Body</h3><p><strong>Media type</strong>: example</p><p><strong>Type</strong>:</p><pre><code>{
+    question: &#39;用户反馈问题&#39;
+}
+</code></pre></div><div class="tab-pane" id="feedback_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: example</p><p><strong>Type</strong>:</p><pre><code>{
+    code: 0
+}
+</code></pre></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="notice" class="panel-title">/notice</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_notice"><span class="parent"></span>/notice</a> <span class="methods"><a href="#notice_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_notice" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#notice_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="notice_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/notice</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#notice_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="notice_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: example</p><p><strong>Type</strong>:</p><pre><code>{
+    "code": 0,
+    "data": &#39;公告信息&#39;
+}
+</code></pre></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="pay" class="panel-title">/pay</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_pay_release"><span class="parent">/pay</span>/release</a> <span class="methods"><a href="#pay_release_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_pay_release" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#pay_release_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="pay_release_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/pay</span>/release</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#pay_release_post_request" data-toggle="tab">Request</a></li><li><a href="#pay_release_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="pay_release_post_request"><h3>Body</h3><p><strong>Media type</strong>: example</p><p><strong>Type</strong>:</p><pre><code>{
+    address: &#39;释放地址&#39;,
+    count: &#39;释放数量&#39;,
+    password: &#39;123456&#39;
+}
+</code></pre></div><div class="tab-pane" id="pay_release_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: example</p><p><strong>Type</strong>:</p><pre><code>{
+    "code": 0
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_pay_inject"><span class="parent">/pay</span>/inject</a> <span class="methods"><a href="#pay_inject_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_pay_inject" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#pay_inject_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="pay_inject_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/pay</span>/inject</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#pay_inject_post_request" data-toggle="tab">Request</a></li><li><a href="#pay_inject_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="pay_inject_post_request"><h3>Body</h3><p><strong>Media type</strong>: example</p><p><strong>Type</strong>:</p><pre><code>{
+    count: &#39;注入体力数量&#39;,
+    password: &#39;123456&#39;
+}
+</code></pre></div><div class="tab-pane" id="pay_inject_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: example</p><p><strong>Type</strong>:</p><pre><code>{
+    "code": 0
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_pay_vbm"><span class="parent">/pay</span>/vbm</a> <span class="methods"><a href="#pay_vbm_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_pay_vbm" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#pay_vbm_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="pay_vbm_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/pay</span>/vbm</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#pay_vbm_post_request" data-toggle="tab">Request</a></li><li><a href="#pay_vbm_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="pay_vbm_post_request"><h3>Body</h3><p><strong>Media type</strong>: example</p><p><strong>Type</strong>:</p><pre><code>{
+    count: &#39;充值金额&#39;,
+    password: &#39;123456&#39;
+}
+</code></pre></div><div class="tab-pane" id="pay_vbm_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: example</p><p><strong>Type</strong>:</p><pre><code>{
+    "code": 0
+}
+</code></pre></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="pool" class="panel-title">/pool</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_pool"><span class="parent"></span>/pool</a> <span class="methods"><a href="#pool_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_pool" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#pool_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="pool_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/pool</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#pool_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="pool_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: example</p><p><strong>Type</strong>:</p><pre><code>{
+    total: &#39;体力池总数&#39;,
+    rest: &#39;剩余体力数&#39;
+}
+</code></pre></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="record" class="panel-title">/record</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_record_release"><span class="parent">/record</span>/release</a> <span class="methods"><a href="#record_release_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_record_release" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>体力释放记录</p></div><div class="list-group"><div onclick="window.location.href = '#record_release_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="record_release_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/record</span>/release</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#record_release_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="record_release_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: example</p><p><strong>Type</strong>:</p><pre><code>{
+    code: 0,
+    data: [{time:释放时间,count:释放体力数量}]
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_record_inject"><span class="parent">/record</span>/inject</a> <span class="methods"><a href="#record_inject_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_record_inject" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>体力注入记录</p></div><div class="list-group"><div onclick="window.location.href = '#record_inject_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="record_inject_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/record</span>/inject</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#record_inject_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="record_inject_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: example</p><p><strong>Type</strong>:</p><pre><code>{
+    code: 0,
+    data: [{time:注入时间,count:注入体力数量}]
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_record_vbm"><span class="parent">/record</span>/vbm</a> <span class="methods"><a href="#record_vbm_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_record_vbm" class="panel-collapse collapse"><div class="panel-body"><div class="resource-description"><p>vbm充值记录</p></div><div class="list-group"><div onclick="window.location.href = '#record_vbm_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="record_vbm_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/record</span>/vbm</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#record_vbm_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="record_vbm_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: example</p><p><strong>Type</strong>:</p><pre><code>{
+    code: 0,
+    data: [{time:充值时间,count:充值金额,order:充值单号}]
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_record_acceleration_time__id_"><span class="parent">/record/acceleration_time</span>/{id}</a> <span class="methods"><a href="#record_acceleration_time__id__get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_record_acceleration_time__id_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#record_acceleration_time__id__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="record_acceleration_time__id__get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/record/acceleration_time</span>/{id}</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#record_acceleration_time__id__get_request" data-toggle="tab">Request</a></li><li><a href="#record_acceleration_time__id__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="record_acceleration_time__id__get_request"><h3>URI Parameters</h3><ul><li><strong>id</strong>: <em><span class="required">required</span>(string)</em></li></ul></div><div class="tab-pane" id="record_acceleration_time__id__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: example</p><p><strong>Type</strong>:</p><pre><code>{
+    code: 0,
+    data: [{username:昵称,user_id:id,accelerate_time:已加速时间,level:用户加速等级}]
+}
+</code></pre></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="vbm" class="panel-title">/vbm</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_vbm"><span class="parent"></span>/vbm</a> <span class="methods"><a href="#vbm_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_vbm" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#vbm_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="vbm_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/vbm</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#vbm_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="vbm_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: example</p><p><strong>Type</strong>:</p><pre><code>{
+    code:0,
+    data: 1000 //vmb数量
+}
+</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="col-md-3"><div id="sidebar" class="hidden-print affix" role="complementary"><ul class="nav nav-pills nav-stacked"><li><a href="#auth">/auth</a></li><li><a href="#bill">/bill</a></li><li><a href="#feedback">/feedback</a></li><li><a href="#notice">/notice</a></li><li><a href="#pay">/pay</a></li><li><a href="#pool">/pool</a></li><li><a href="#record">/record</a></li><li><a href="#vbm">/vbm</a></li></ul></div></div></div></div></body></html>

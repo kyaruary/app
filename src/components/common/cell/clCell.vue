@@ -14,7 +14,15 @@
     v-else-if="type ==='single'"
     :class="{'single-choose': this.choose,...className}"
     @click="cb"
-  >{{title}}</div>
+  >
+    <div v-if="title" class="icon">
+      <slot name="icon"></slot>
+      {{title}}
+    </div>
+    <div v-else class="left">
+      <slot name="left"></slot>
+    </div>
+  </div>
 
   <div class="cl-cell large-cell" v-else-if="type ==='large'" :class="className">
     <div class="cl-large-title" v-if="title">{{title}}</div>
@@ -44,7 +52,7 @@ export default {
       default: ""
     },
     count: {
-      type: String,
+      type: String | Number,
       default: ""
     },
     gutter: {
@@ -102,6 +110,16 @@ export default {
   justify-content: center;
   color: rgba(0, 11, 39, 1);
   font-size: 18px;
+  .icon {
+    display: flex;
+    align-items: center;
+  }
+  .left {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-start;
+  }
 }
 .single-choose {
   background-color: rgba(67, 161, 195, 1);
@@ -124,15 +142,18 @@ export default {
   width: 345px;
   margin: 0 auto;
   min-height: 100px;
+  height: 100px;
   text-align: center;
   overflow: hidden;
   .cl-large-title {
     font-size: 12px;
     margin-top: 14px;
+    height: 12px;
   }
   .cl-large-count {
     margin-top: 26px;
     font-size: 30px;
+    height: 30px;
   }
 }
 .cell-disable {
@@ -142,16 +163,17 @@ export default {
   min-height: 40px;
 }
 .height-40 {
-  height: 40px;
+  min-height: 40px;
 }
 .height-50 {
-  height: 50px;
+  min-height: 50px;
 }
 .height-30 {
-  height: 30px;
+  min-height: 30px;
+  font-size: 12px;
 }
 .height-100 {
-  height: 100px;
+  min-height: 100px;
 }
 .margin-b-10 {
   margin-bottom: 10px;

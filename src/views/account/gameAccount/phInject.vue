@@ -4,7 +4,7 @@
       <span slot="right" @click="recharge">充值</span>
     </cl-header>
     <div class="swiper">
-      <cell-list :click="getRechargeValue" :limit="6888"></cell-list>
+      <cell-list :click="getRechargeValue" :limit="rest"></cell-list>
     </div>
     <inject-modal :visible="modalVisible" :ph="rechargeValue" :onclose="closeModal"></inject-modal>
   </div>
@@ -14,6 +14,7 @@
 import clHeader from "../../../components/common/clHeader";
 import cellList from "../../../components/common/cell/cellList";
 import injectModal from "../../../components/modal/injectModal";
+import { mapState } from "vuex";
 export default {
   components: {
     clHeader,
@@ -23,7 +24,7 @@ export default {
   data() {
     return {
       modalVisible: false,
-      rechargeValue: null
+      rechargeValue: 0
     };
   },
   methods: {
@@ -38,6 +39,12 @@ export default {
     },
     closeModal() {
       this.modalVisible = false;
+    }
+  },
+  computed: {
+    ...mapState(["bill"]),
+    rest() {
+      return 9000 - this.bill.detail.ph;
     }
   }
 };

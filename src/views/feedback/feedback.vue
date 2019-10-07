@@ -6,7 +6,9 @@
     <div class="feedback-q">
       <edit-div v-model="text"></edit-div>
     </div>
-    <span class="feedback-link" @click="()=>{this.$router.push('/feedback/list')}">反馈记录</span>
+    <div class="feedback-link" @click="()=>{this.$router.push('/feedback/list')}">
+      <span class="has-info">反馈列表</span>
+    </div>
   </div>
 </template>
 
@@ -42,6 +44,19 @@ export default {
   font-size: 14px;
   color: @sec_color;
   text-align: center;
+  .has-info {
+    position: relative;
+    &::after {
+      position: absolute;
+      content: "";
+      display: block;
+      .square(4px);
+      background-color: red;
+      border-radius: 50%;
+      top: -4px;
+      right: -4px;
+    }
+  }
 }
 .feedback-q {
   margin-top: 30px;

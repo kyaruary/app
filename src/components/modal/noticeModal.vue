@@ -1,5 +1,5 @@
 <template>
-  <div class="container modal-container">
+  <div class="container modal-container" v-show="visible" @click="hideModal">
     <div class="modal">
       <div class="title">公告</div>
       <div class="content"></div>
@@ -8,7 +8,26 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      visible: false
+    };
+  },
+  mounted() {
+    this.$bus.$on("notice-modal-show", () => {
+      this.visible = true;
+    });
+    this.$bus.$on("notice-modal-hidden", () => {
+      this.visible = false;
+    });
+  },
+  methods: {
+    hideModal() {
+      this.visible = false;
+    }
+  }
+};
 </script>
 
 <style lang="less" scoped>

@@ -6,7 +6,7 @@
           <span class="icon-circle"></span>
           <span>提交成功</span>
         </div>
-        <div class="desc">已成功注入 1000 体力至体力池</div>
+        <div class="desc">已成功提交释放 {{ph}} 体力的申请</div>
       </div>
     </cl-cell>
   </div>
@@ -17,7 +17,8 @@ import clCell from "@/components/common/cell/clCell";
 export default {
   components: {
     clCell
-  }
+  },
+  props: ["ph"]
 };
 </script>
 
@@ -44,6 +45,7 @@ export default {
     .desc {
       font-size: 12px;
       margin-top: 33px;
+      margin-bottom: 14px;
     }
   }
 }

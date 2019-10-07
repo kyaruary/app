@@ -26,6 +26,7 @@
       </div>
       <div class="status-bar"></div>
     </div>
+    <notice-modal></notice-modal>
   </div>
 </template>
 
@@ -33,6 +34,7 @@
 import clLink from "../../components/common/clLink";
 import clPool from "../../components/common/pool";
 import clSide from "../../components/sidebar/clSide";
+import noticeModal from "../../components/modal/noticeModal";
 import { mapMutations, mapState, mapActions } from "vuex";
 export default {
   data() {
@@ -55,7 +57,10 @@ export default {
         },
         {
           title: "公告",
-          type: "danger"
+          type: "danger",
+          cb: () => {
+            this.showNoticeModal();
+          }
         }
       ]
     };
@@ -63,11 +68,15 @@ export default {
   components: {
     clLink,
     clPool,
-    clSide
+    clSide,
+    noticeModal
   },
   methods: {
     ...mapMutations(["showSidebar", "setUser"]),
-    ...mapActions(["getBill"])
+    ...mapActions(["getBill", "getVbm"]),
+    showNoticeModal() {
+      this.$bus.$emit("notice-modal-show");
+    }
   },
   async mounted() {
     if (this.user.username == "") {
@@ -78,6 +87,7 @@ export default {
         : console.log("need login");
     }
     await this.getBill(this.user.user_id);
+    this.getVbm();
     this.status_timestamps = this.bill_detail.release_time;
     this.status_ph = this.bill_detail.ph;
     this.re_time = this.status_timestamps - new Date().getTime();

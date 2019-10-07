@@ -3,8 +3,9 @@
     <release-item
       v-for="(item,index) in list"
       :key="item.nickname + index"
+      :level="item.level"
       :nickname="item.nickname"
-      :time="item.time"
+      :time="item.accelerate_time"
     ></release-item>
   </div>
 </template>

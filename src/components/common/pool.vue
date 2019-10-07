@@ -1,9 +1,8 @@
 <template>
   <div>
     <div class="cl-pool">
-      <span class="n-progress">{{rest}}/{{total}}</span>
+      <span class="n-progress">{{total}}</span>
     </div>
-    <div class="pool-desc">体力池剩余/体力池总量</div>
   </div>
 </template>
 
@@ -24,11 +23,12 @@ export default {
     this.total = pool.total;
     this.wave = Wave.create(".cl-pool", {
       color: "#348bfb",
-      baseHeight: (pool.rest / pool.total) * 100 - 10 + "%",
-      waveHeight: "10%",
+      baseHeight: "70%",
+      waveHeight: "25%",
       speed: 5000
     });
-    document.querySelector(".cl-pool>canvas").style.borderRadius = "20px";
+    document.querySelector(".cl-pool>canvas").style.borderRadius = "30px";
+    document.querySelector(".cl-pool>canvas").style.backgroundColor = "#fff";
     document.querySelector(".cl-pool>canvas").style.boxShadow =
       "0 0 0px 2px #348bfb";
     this.wave.toggleAnimation();
@@ -41,16 +41,16 @@ export default {
 
 <style lang="less" scoped>
 .cl-pool {
-  background-color: #fff;
   height: 74px;
-  width: 220px;
-  border-radius: 20px;
+  width: 150px;
+  border-radius: 30px;
+  box-sizing: border-box;
   overflow: hidden;
   .n-progress {
     color: #fff;
     position: absolute;
-    bottom: 10px;
-    right: 13px;
+    bottom: 15px;
+    right: 15px;
     @base_font-family();
     font-size: 18px;
     line-height: 13px;

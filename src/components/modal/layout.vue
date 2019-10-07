@@ -1,16 +1,18 @@
 <template>
-  <div class="modal-container" v-if="visible">
-    <pwd-message
-      :title="title"
-      :desc="desc"
-      :count="ph"
-      :list="password"
-      :onclose="closeHandle"
-      v-if="visible"
-    >
-      <slot></slot>
-    </pwd-message>
-    <keypad :visible="true" :onclick="getPassword" :ondelete="deletePassword" />
+  <div class="modal-container" v-show="visible">
+    <div class="modal-dis" v-show="loading">
+      <pwd-message
+        :title="title"
+        :desc="desc"
+        :count="ph"
+        :list="password"
+        :onclose="closeHandle"
+        v-if="visible"
+      >
+        <slot></slot>
+      </pwd-message>
+    </div>
+    <keypad :visible="loading" :onclick="getPassword" :ondelete="deletePassword" />
   </div>
 </template>
 
@@ -29,7 +31,7 @@ export default {
   },
   props: {
     ph: {
-      type: Number,
+      type: Number | String,
       default: 0
     },
     title: {
@@ -55,6 +57,10 @@ export default {
       default() {
         return () => false;
       }
+    },
+    loading: {
+      type: Boolean,
+      default: true
     }
   },
   methods: {
@@ -64,8 +70,9 @@ export default {
       } else if (this.password.length === 5) {
         this.password.push(num);
         this.onfinish(this.password.join(""));
+        this.password = [];
       } else {
-        throw "";
+        return false;
       }
     },
     deletePassword() {
@@ -87,6 +94,16 @@ export default {
   left: 0;
   bottom: 0;
   top: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.8);
+  .modal-dis {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 200px;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 </style>

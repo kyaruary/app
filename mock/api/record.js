@@ -32,4 +32,15 @@ router.get('/acceleration_time/:id', (req, res) => {
     }
     res.send({ code: 0, data });
 })
+router.get('/recharge', (req, res) => {
+    const data = [];
+    for (let i = 0; i < 20; i++) {
+        data.push({
+            order: 'V2331224124190',
+            time: '2013/12/21 12:12',
+            count: '1000' * i
+        })
+    }
+    res.send({ code: 0, data })
+})
 module.exports = router;

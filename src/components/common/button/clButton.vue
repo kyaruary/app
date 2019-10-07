@@ -1,5 +1,10 @@
 <template>
-  <button @click="handle" class="cl-button" :style="style" :class="className">
+  <button
+    @click="handle"
+    class="cl-button"
+    :style="style"
+    :class="{...className,'cl-btn-disable': this.disable}"
+  >
     <slot></slot>
   </button>
 </template>
@@ -12,7 +17,6 @@ export default {
         width: this.width === 0 ? "auto" : this.width + "px"
       },
       className: {
-        "cl-btn-disable": this.disable,
         ["cl-btn-" + this.type]: true
       }
     };
@@ -68,6 +72,9 @@ export default {
 .cl-btn-disable {
   background-color: @sec_color;
   opacity: 0.2;
+}
+.cl-btn-black {
+  background-color: @sec_color;
 }
 .cl-btn-info {
   background-color: #fff;
